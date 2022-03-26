@@ -103,28 +103,29 @@ export class RobotCar3d {
         }
      */
 
-
-    heading = 0;
+    // Modeling of a differential drive robot
+    // ref: https://youtu.be/XG4cODYVbJk?t=230  
+    theta = 0;
     v = 0;
     dt = 1/30;
     w = 0;
     motorValRight = 39;
     motorValLeft = 15;
+    wheelDist = 4;
 
     render(){
         
         var car = this.body;
 
-        car.position.x += (this.v * Math.cos(this.heading))*this.dt;
-        car.position.z += (this.v * Math.sin(this.heading))*this.dt;
-        this.heading += this.w*this.dt; 
+        car.position.x += (this.v * Math.cos(this.theta))*this.dt;
+        car.position.z += (this.v * Math.sin(this.theta))*this.dt;
+        this.theta += this.w*this.dt; 
+          
+        var vAjust = 100;
+        var velocityAmount = (this.motorValRight/vAjust)+(this.motorValLeft/vAjust);
+        var rotationAmount = (this.motorValRight/vAjust)-(this.motorValLeft/vAjust);
         
-
-        var vel = 100;
-        var velocityAmount = (this.motorValRight/vel)+(this.motorValLeft/vel);
-        var rotationAmount = (this.motorValRight/vel)-(this.motorValLeft/vel);
-
-        this.v = -velocityAmount*17;
+        this.v = -velocityAmount* this.wheelDist;
         this.w = rotationAmount;
         
         
@@ -144,7 +145,7 @@ export class RobotCar3d {
         
         // car.rotate(Axis.Y,  this.heading, Space.WORLD);
 
-        car.rotation = new Vector3(0, -this.heading, 0);
+        car.rotation = new Vector3(0, -this.theta, 0);
 
     }
 

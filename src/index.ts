@@ -1,12 +1,14 @@
-import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera"
-import { Engine } from "@babylonjs/core/Engines/engine"
-import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight"
-import { Color3, Mesh, Path3D, MeshBuilder, Scene, StandardMaterial, Vector3 } from "@babylonjs/core";
+import { Color3, MeshBuilder, Scene, Vector3 } from '@babylonjs/core';
+import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera';
+import { Engine } from '@babylonjs/core/Engines/engine';
+import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
+
+import { RobotCar3d } from './3d/RobotCar3d';
+
  
 const canvas = document.getElementById("view") as HTMLCanvasElement
 const engine = new Engine(canvas, true)
 
-import { RobotCar3d } from "./3d/RobotCar3d"
   
 const scene = new Scene(engine)
 
@@ -16,14 +18,8 @@ camera.attachControl(canvas, true);
 
 var light = new HemisphericLight("light1", new Vector3(1, 0.5, 0), scene);
 
-const mesh = MeshBuilder.CreateGround("mesh", {}, scene)
-
-var material = new StandardMaterial("material", scene);
-mesh.material = material
 
 const robot = new RobotCar3d(scene);
-
-
 
 
 
@@ -41,6 +37,7 @@ for (var i = 0; i < n + 1; i++) {
 var track = MeshBuilder.CreateLines('track', {points: points}, scene);
 track.color = new Color3(0, 0, 0);
     
+
 var ground = MeshBuilder.CreateGround("ground", {width: 3*r, height: 3*r}, scene);
 
 // Sollow
@@ -48,7 +45,7 @@ var ground = MeshBuilder.CreateGround("ground", {width: 3*r, height: 3*r}, scene
 robot.setLinePoints(points);
 /*----------------Position and Rotate Car at Start---------------------------*/
 robot.body.position.y = 4;
-robot.body.position.z = r;
+//robot.body.position.z = r;
 
 
 engine.runRenderLoop(() => {
