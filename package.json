@@ -1,0 +1,38 @@
+{
+  "name": "@p4labs/robotsim",
+  "version": "0.0.0",
+  "main": "dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "author": "Tawfiq Jawhar <tawfiq@p4labs.io>",
+  "repository": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && tsc --sourceMap false && tsc -m commonjs --outDir dist/cjs --sourceMap false && copyfiles -f ./src/imgs/*.jpg ./src/imgs/*.png dist/cjs/imgs ",
+    "build:demo": "copyfiles -f ./src/imgs/*.jpg ./src/imgs/*.png ./build/imgs && parcel build ./src/index.html -d ./dist",
+    "prepare": "npm run build",
+    "start": "copyfiles -f src/imgs/*.jpg src/imgs/*.png build/imgs && parcel src/index.html -d ./build"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "glslify-bundle": "^5.1.1",
+    "glslify-deps": "^1.3.2",
+    "parcel-bundler": "^1.12.4",
+    "@parcel/transformer-glsl": "^2.4.0",
+    "typescript": "^3.6.5"
+  },
+  "engines": {
+    "node": ">= 8.0.0",
+    "npm": ">= 5.0.0"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^4.2.0",
+    "avr8js": "^0.18.6",
+    "copyfiles": "^2.4.1"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
+}
